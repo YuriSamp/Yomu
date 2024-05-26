@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"os"
 	"tokei/output"
 	"tokei/reader"
@@ -18,7 +17,9 @@ func main() {
 func handleArgs() string {
 	args := os.Args[1:]
 
-	fmt.Println(args)
+	if len(args) == 0 {
+		panic("Insert the directory you want to read")
+	}
 
 	dir := args[0]
 
