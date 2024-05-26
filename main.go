@@ -1,28 +1,26 @@
 package main
 
 import (
+	"fmt"
 	"os"
-	"path/filepath"
-	"tokei/output"
 	"tokei/reader"
 )
 
 func main() {
-	dir := "./test-folder"
+	dir := handleArgs()
 
-	files, err := os.ReadDir(dir)
+	reader.Start(dir)
+	
+	// outputEntry := []reader.CodeInformation{}
+	// output.OutputBuilder(outputEntry)
+}
 
-	if err != nil {
-		panic(err)
-	}
+func handleArgs() string {
+	args := os.Args[1:]
 
-	outputEntry := []reader.CodeInformation{}
+	fmt.Println(args)
 
-	for _, file := range files {
-		filePath := filepath.Join(dir, file.Name())
-		Output := reader.Read(filePath)
-		outputEntry = append(outputEntry, Output )
-	}
+	dir := args[0]
 
-	output.OutputBuilder(outputEntry)
+	return dir
 }
