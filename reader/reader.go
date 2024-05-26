@@ -16,14 +16,22 @@ type CodeInformation struct {
 }
 
 var extensionMap = map[string]string{
-	"ts":   "Typescript",
-	"js":   "Javascript",
+	"ts": "Typescript",
+	"tsx": "Typescript",
+	"js":  "Javascript",
+	"cjs": "Javascript",
+	"mjs": "Javascript",
 	"json": "Json",
 	"yaml": "Yaml",
+	"yml" : "Yaml",
 	"go": "Go",
 	"mod" : "Go",
 	"sum" : "Go",
 	"md": "Markdown",
+	"css" : "CSS",
+	"svg" : "SVG",
+	"html" : "HTML",
+	"Dockerfile" : "Dockerfile", // handle unique name file ?
 }
 
 func Start(dir  string) []CodeInformation {
@@ -102,7 +110,7 @@ func reduceInformation(informationList []CodeInformation) []CodeInformation {
 
 func isIgnoredFile(markedPath []string, word  string) bool {
 
-	ignoredFiles := []string{"node_modules"}
+	ignoredFiles := []string{"node_modules", "dist"}
 
 	if includes(markedPath, word) || strings.HasPrefix(word, ".") || includes(ignoredFiles, word) {
 		return true
