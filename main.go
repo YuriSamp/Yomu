@@ -3,16 +3,16 @@ package main
 import (
 	"fmt"
 	"os"
+	"tokei/output"
 	"tokei/reader"
 )
 
 func main() {
 	dir := handleArgs()
 
-	reader.Start(dir)
+	info:= reader.Start(dir)
 	
-	// outputEntry := []reader.CodeInformation{}
-	// output.OutputBuilder(outputEntry)
+	output.OutputBuilder(info)
 }
 
 func handleArgs() string {

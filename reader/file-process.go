@@ -38,7 +38,7 @@ func processFile(filePath string) CodeInformation  {
 		codeLines += 1
 	}
 
-	return CodeInformation{TotalLines: len(lines), CommentedLines:  commentedLines,CodeLines:  codeLines, BlankLines:  blankLines, Extension: extension }
+	return CodeInformation{TotalLines: len(lines), CommentedLines:  commentedLines,CodeLines:  codeLines, BlankLines:  blankLines, Extension: extension, Files: 1 }
 }
 
 func grabExtension(fileName string ) string {

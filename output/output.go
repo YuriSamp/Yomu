@@ -24,7 +24,7 @@ func OutputBuilder(entry []reader.CodeInformation) {
 	for _, information := range entry {
 		fmt.Printf("%-12s %12d %12d %12d %12d %12d \n",
 		information.Extension, 
-		0,
+		information.Files,
 		information.TotalLines, 
 		information.CodeLines, 
 		information.CommentedLines, 

@@ -1,7 +1,6 @@
 package reader
 
 import (
-	"fmt"
 	"os"
 	"path/filepath"
 	"strings"
@@ -9,6 +8,7 @@ import (
 
 type CodeInformation struct {
 	Extension string
+	Files int
 	TotalLines int
 	CommentedLines int
 	CodeLines int
@@ -25,13 +25,13 @@ var extensionMap = map[string]string{
 	"md": "Markdown",
 }
 
-func Start(dir  string) {
+func Start(dir  string) []CodeInformation {
 	EmptyCodeInformationList := []CodeInformation{}
 	markedPath := []string{}
 
 	CodeInformationList, _ := readCurrDir(dir, EmptyCodeInformationList, markedPath)
 
-	reduceInformation(CodeInformationList)
+	return reduceInformation(CodeInformationList)
 }
 
 func readCurrDir(dir string, CodeInformationList []CodeInformation, markedPath []string) ([]CodeInformation,[]string ) {
@@ -63,7 +63,6 @@ func readCurrDir(dir string, CodeInformationList []CodeInformation, markedPath [
 		return CodeInformationList, markedPath
 }
 
-
 func includes(pathArray []string, word  string) bool {
 	for _, path := range pathArray {
 		if path == word {
@@ -74,11 +73,28 @@ func includes(pathArray []string, word  string) bool {
 	return false
 }
 
-
 func reduceInformation(informationList []CodeInformation) []CodeInformation {
-	for _, info := range informationList {
-		fmt.Println(info)
-	}
 
-	return informationList
+	patchedInfo := []CodeInformation{}
+	summedData := make(map[string]CodeInformation)
+
+	
+	for _, entry := range informationList {
+		if val, ok := summedData[entry.Extension]; ok {
+			val.TotalLines += entry.TotalLines
+			val.Files += entry.Files
+			val.CommentedLines += entry.CommentedLines
+			val.CodeLines += entry.CodeLines
+			val.BlankLines += entry.BlankLines
+			summedData[entry.Extension] = val
+			} else {
+				summedData[entry.Extension] = entry
+			}
+		}
+		
+		for _, info := range summedData {
+			patchedInfo = append(patchedInfo, info)
+		}
+		
+		return patchedInfo
 }
