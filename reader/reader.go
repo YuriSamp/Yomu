@@ -22,6 +22,7 @@ var extensionMap = map[string]string{
 	"yaml": "Yaml",
 	"go": "Go",
 	"mod" : "Go",
+	"sum" : "Go",
 	"md": "Markdown",
 }
 
