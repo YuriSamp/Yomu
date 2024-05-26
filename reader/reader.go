@@ -42,7 +42,6 @@ func readCurrDir(dir string, CodeInformationList []CodeInformation, markedPath [
 		}
 
 		for _ ,file := range files {
-
 			if includes(markedPath, file.Name()) || strings.HasPrefix(file.Name(), ".") {
 				continue
 			}
@@ -55,17 +54,7 @@ func readCurrDir(dir string, CodeInformationList []CodeInformation, markedPath [
 			}
 
 			if !file.IsDir() {
-				extension := grabExtension(filePath)
-				totalLines, commentedLines, codeLines, blankLines := readFileLines(filePath)
-
-				
-				info := CodeInformation{
-            Extension:      extension,
-            TotalLines:     totalLines,
-            CommentedLines: commentedLines,
-            CodeLines:      codeLines,
-            BlankLines:     blankLines,
-        }
+				info := processFile(filePath)
         CodeInformationList = append(CodeInformationList, info)
 			}
 		}
@@ -74,55 +63,8 @@ func readCurrDir(dir string, CodeInformationList []CodeInformation, markedPath [
 		return CodeInformationList, markedPath
 }
 
-func readFileLines(filePath string) (int, int, int, int)  {
-	fileContentInBytes, err := os.ReadFile(filePath)
-
-	if err != nil {
-		panic(err)
-	}
-
-	fileContent := string(fileContentInBytes)
-
-	lines := strings.Split(fileContent, "\n")
-
-	blankLines := 0
-	commentedLines :=0
-	codeLines := 0
-
-	for _, line := range lines {
-		trimmedLine := strings.TrimSpace(line)
-
-		if strings.HasPrefix(trimmedLine, "//") {
-			commentedLines += 1
-			continue
-		}
-
-		if len(line) == 0 {
-			blankLines += 1
-			continue
-		}
-
-		codeLines += 1
-	}
-
-	return len(lines), commentedLines, codeLines, blankLines
-}
-
-func grabExtension(fileName string ) string {
-	extension := strings.Split(fileName, ".")
-	extensionKey := extension[len(extension)-1]
-
-	language, ok := extensionMap[extensionKey]
-
-	if !ok {
-		language = "Unknown"
-	}
-
-	return language
-}
 
 func includes(pathArray []string, word  string) bool {
-
 	for _, path := range pathArray {
 		if path == word {
 			return true
@@ -134,7 +76,6 @@ func includes(pathArray []string, word  string) bool {
 
 
 func reduceInformation(informationList []CodeInformation) []CodeInformation {
-
 	for _, info := range informationList {
 		fmt.Println(info)
 	}
