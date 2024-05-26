@@ -20,6 +20,7 @@ func OutputBuilder(entry []reader.CodeInformation) {
 	totalCodeLines := 0 
 	totalCommentedLines := 0
 	totalBlankLines := 0
+	totalFile := 0
 
 	for _, information := range entry {
 		fmt.Printf("%-12s %12d %12d %12d %12d %12d \n",
@@ -30,9 +31,10 @@ func OutputBuilder(entry []reader.CodeInformation) {
 		information.CommentedLines, 
 		information.BlankLines)
 
+		totalFile += information.Files
 		totalLines += information.TotalLines
-		totalCommentedLines += information.CodeLines
-		totalCodeLines += information.CommentedLines
+		totalCodeLines += information.CodeLines
+		totalCommentedLines += information.CommentedLines
 		totalBlankLines += information.BlankLines
 	}
 
@@ -40,7 +42,7 @@ func OutputBuilder(entry []reader.CodeInformation) {
 
 		fmt.Printf("%-12s %12d %12d %12d %12d %12d \n",
 		"Total", 
-		0,
+		totalFile,
 		totalLines, 
 		totalCodeLines, 
 		totalCommentedLines, 

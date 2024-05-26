@@ -43,7 +43,7 @@ func readCurrDir(dir string, CodeInformationList []CodeInformation, markedPath [
 		}
 
 		for _ ,file := range files {
-			if includes(markedPath, file.Name()) || strings.HasPrefix(file.Name(), ".") {
+			if isIgnoredFile(markedPath, file.Name()) {
 				continue
 			}
 
@@ -98,4 +98,15 @@ func reduceInformation(informationList []CodeInformation) []CodeInformation {
 		}
 		
 		return patchedInfo
+}
+
+func isIgnoredFile(markedPath []string, word  string) bool {
+
+	ignoredFiles := []string{"node_modules"}
+
+	if includes(markedPath, word) || strings.HasPrefix(word, ".") || includes(ignoredFiles, word) {
+		return true
+	}
+
+	return false
 }
