@@ -4,6 +4,7 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+	"Yomu/utils"
 )
 
 type CodeInformation struct {
@@ -72,16 +73,6 @@ func readCurrDir(dir string, CodeInformationList []CodeInformation, markedPath [
 		return CodeInformationList, markedPath
 }
 
-func includes(pathArray []string, word  string) bool {
-	for _, path := range pathArray {
-		if path == word {
-			return true
-		}
-	}
-
-	return false
-}
-
 func reduceInformation(informationList []CodeInformation) []CodeInformation {
 
 	patchedInfo := []CodeInformation{}
@@ -112,7 +103,7 @@ func isIgnoredFile(markedPath []string, word  string) bool {
 
 	ignoredFiles := []string{"node_modules", "dist"}
 
-	if includes(markedPath, word) || strings.HasPrefix(word, ".") || includes(ignoredFiles, word) {
+	if utils.Includes(markedPath, word) || strings.HasPrefix(word, ".") || utils.Includes(ignoredFiles, word) {
 		return true
 	}
 

@@ -2,7 +2,7 @@ package output
 
 import (
 	"fmt"
-	"tokei/reader"
+	"Yomu/reader"
 )
 
 const (
