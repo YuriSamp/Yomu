@@ -1,0 +1,67 @@
+{
+  "JavaScript": {
+    "name": "Javascript",
+    "line_comment": ["//"],
+    "multi_line_comments": ["/*", "*/"],
+    "extensions": ["cjs", "js", "mjs"]
+  },
+  "Json": {
+    "name": "Json",
+    "extensions": ["json"]
+  },
+  "Jsx": {
+    "name": "Jsx",
+    "line_comment": ["//"],
+    "multi_line_comments": ["/*", "*/"],
+    "extensions": ["jsx"]
+  },
+  "Markdown": {
+    "name": "Markdown",
+    "extensions": ["md", "markdown"]
+  },
+  "Sql": {
+    "name": "Sql",
+    "line_comment": ["--"],
+    "multi_line_comments": ["/*", "*/"],
+    "extensions": ["sql"]
+  },
+  "Svg": {
+    "name": "Svg",
+    "multi_line_comments": ["<!--", "-->"],
+    "extensions": ["svg"]
+  },
+  "Go": {
+    "name": "Go",
+    "line_comment": ["//"],
+    "multi_line_comments": ["/*", "*/"],
+    "extensions": ["go"]
+  },
+  "Yaml": {
+    "name": "Yaml",
+    "line_comment": ["#"],
+    "extensions": ["yaml", "yml"]
+  },
+  "Css": {
+    "name": "Css",
+    "line_comment": ["//"],
+    "multi_line_comments": ["/*", "*/"],
+    "extensions": ["css"]
+  },
+  "TypeScript": {
+    "name": "Typescript",
+    "line_comment": ["//"],
+    "multi_line_comments": ["/*", "*/"],
+    "extensions": ["ts", "mts", "cts"]
+  },
+  "Tsx": {
+    "name": "Tsx",
+    "line_comment": ["//"],
+    "multi_line_comments": ["/*", "*/"],
+    "extensions": ["tsx"]
+  },
+  "Html": {
+    "name": "Html",
+    "multi_line_comments": ["<!--", "-->"],
+    "extensions": ["html", "htm"]
+  }
+}
