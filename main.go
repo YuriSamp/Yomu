@@ -7,9 +7,11 @@ import (
 )
 
 func main() {
-	dir := args.HandleArgs()
+	dir, read := args.HandleArgs()
 
-	info := reader.Start(dir)
-	
-	output.OutputBuilder(info)
+	if read {
+		info := reader.Start(dir)
+		
+		output.OutputBuilder(info)
+	}
 }
