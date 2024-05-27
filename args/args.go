@@ -1,9 +1,9 @@
 package args
 
 import (
+	"Yomu/utils"
 	"fmt"
 	"os"
-	"Yomu/utils"
 )
 
 func HandleArgs() string {
@@ -11,7 +11,7 @@ func HandleArgs() string {
 
 	args := os.Args[1:]
 
-	if utils.Includes(args, "-v") {
+	if utils.Includes(args, "-v") || utils.Includes(args, "--version") {
 		fmt.Printf("Yomu %s \n", version)
 	}
 
