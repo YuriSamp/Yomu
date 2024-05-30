@@ -34,7 +34,7 @@
     "name": "Go",
     "line_comment": ["//"],
     "multi_line_comments": ["/*", "*/"],
-    "extensions": ["go"]
+    "extensions": ["go", "mod"]
   },
   "Yaml": {
     "name": "Yaml",

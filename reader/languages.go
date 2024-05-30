@@ -36,3 +36,29 @@ func ReadLanguages() {
 		fmt.Println(language.Name)
 	}
 }
+
+func BuildExtensionMap() map[string]string {
+
+	extensionMap :=  make(map[string]string)
+
+	jsonFile, err := os.ReadFile("languages.json")
+
+	if err != nil {
+		panic(err)
+	}
+
+	err = json.Unmarshal(jsonFile, &supportedLanguages)
+
+	if err != nil {
+		panic(err)
+	}
+	
+	for _, language := range supportedLanguages {
+		for _, extemnsions := range language.Extensions {
+			extensionMap[extemnsions] = language.Name
+		}
+	}
+
+	
+	return extensionMap
+} 

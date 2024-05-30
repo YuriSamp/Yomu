@@ -43,7 +43,10 @@ func processFile(filePath string) CodeInformation  {
 
 func grabExtension(fileName string ) string {
 	extension := strings.Split(fileName, ".")
+	
 	extensionKey := extension[len(extension)-1]
+
+	extensionMap := BuildExtensionMap()
 
 	language, ok := extensionMap[extensionKey]
 

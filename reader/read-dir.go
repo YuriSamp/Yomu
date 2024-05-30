@@ -1,10 +1,10 @@
 package reader
 
 import (
+	"Yomu/utils"
 	"os"
 	"path/filepath"
 	"strings"
-	"Yomu/utils"
 )
 
 type CodeInformation struct {
@@ -14,25 +14,6 @@ type CodeInformation struct {
 	CommentedLines int
 	CodeLines int
 	BlankLines int
-}
-
-var extensionMap = map[string]string{
-	"ts": "Typescript",
-	"tsx": "Typescript",
-	"js":  "Javascript",
-	"cjs": "Javascript",
-	"mjs": "Javascript",
-	"json": "Json",
-	"yaml": "Yaml",
-	"yml" : "Yaml",
-	"go": "Go",
-	"mod" : "Go",
-	"sum" : "Go",
-	"md": "Markdown",
-	"css" : "CSS",
-	"svg" : "SVG",
-	"html" : "HTML",
-	"Dockerfile" : "Dockerfile", // handle unique name file ?
 }
 
 func Start(dir  string) []CodeInformation {
