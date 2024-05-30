@@ -28,14 +28,14 @@ func HandleArgs() {
 		os.Exit(0)
 	}
 
-	if utils.Includes(args, "-o") || utils.Includes(args, "--output") {
-		// readLanguages()
-		// os.Exit(0)
-	}
-
 	dir := args[0]
 
 	info := reader.Start(dir)
+
+	if utils.Includes(args, "-o") || utils.Includes(args, "--output") {
+		output.JsonOutput(info)
+		os.Exit(0)
+	}
 		
-	output.OutputBuilder(info)
+	output.TableOutputBuilder(info)
 }

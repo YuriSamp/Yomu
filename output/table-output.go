@@ -1,15 +1,15 @@
 package output
 
 import (
-	"fmt"
 	"Yomu/reader"
+	"fmt"
 )
 
 const (
 	divisor = "==============================================================================="
 )
 
-func OutputBuilder(entry []reader.CodeInformation) {
+func TableOutputBuilder(information []reader.CodeInformation) {
 	fmt.Println(divisor)
 
 	fmt.Println("Language            Files        Lines         Code     Comments       Blanks")
@@ -22,7 +22,7 @@ func OutputBuilder(entry []reader.CodeInformation) {
 	totalBlankLines := 0
 	totalFile := 0
 
-	for _, information := range entry {
+	for _, information := range information {
 		fmt.Printf("%-12s %12d %12d %12d %12d %12d \n",
 		information.Extension, 
 		information.Files,
