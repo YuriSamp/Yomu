@@ -1,6 +1,8 @@
 package args
 
 import (
+	"Yomu/output"
+	"Yomu/reader"
 	"Yomu/utils"
 	"encoding/json"
 	"fmt"
@@ -18,29 +20,35 @@ type Language struct {
 
 var supportedLanguages Languages
 
-func HandleArgs() string {
+func HandleArgs() {
 	version := "0.0.1"
 
 	args := os.Args[1:]
+
+	if len(args) == 0 {
+		panic("Insert at least one argument")
+	}
 
 	if utils.Includes(args, "-v") || utils.Includes(args, "--version") {
 		fmt.Printf("Yomu %s \n", version)
 		os.Exit(0)
 	}
 
-	if utils.Includes(args, "-l") {
+	if utils.Includes(args, "-l") || utils.Includes(args, "--languages") {
 		readLanguages()
 		os.Exit(0)
 	}
 
-
-	if len(args) == 0 {
-		panic("Insert at least one argument")
+	if utils.Includes(args, "-o") || utils.Includes(args, "--output") {
+		// readLanguages()
+		// os.Exit(0)
 	}
 
 	dir := args[0]
 
-	return dir
+	info := reader.Start(dir)
+		
+	output.OutputBuilder(info)
 }
 
 
