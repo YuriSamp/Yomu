@@ -5,5 +5,5 @@ import (
 )
 
 func main() {
-	 args.HandleArgs()
+	args.HandleArgs()
 }

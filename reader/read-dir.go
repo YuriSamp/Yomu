@@ -8,15 +8,15 @@ import (
 )
 
 type CodeInformation struct {
-	Extension string
-	Files int
-	TotalLines int
+	Extension      string
+	Files          int
+	TotalLines     int
 	CommentedLines int
-	CodeLines int
-	BlankLines int
+	CodeLines      int
+	BlankLines     int
 }
 
-func Start(dir  string) []CodeInformation {
+func Start(dir string) []CodeInformation {
 	EmptyCodeInformationList := []CodeInformation{}
 	markedPath := []string{}
 
@@ -25,33 +25,33 @@ func Start(dir  string) []CodeInformation {
 	return reduceInformation(CodeInformationList)
 }
 
-func readCurrDir(dir string, CodeInformationList []CodeInformation, markedPath []string) ([]CodeInformation,[]string ) {
-		files, err := os.ReadDir(dir)
+func readCurrDir(dir string, CodeInformationList []CodeInformation, markedPath []string) ([]CodeInformation, []string) {
+	files, err := os.ReadDir(dir)
 
-		if err != nil {
-			panic(err)
+	if err != nil {
+		panic(err)
+	}
+
+	for _, file := range files {
+		if isIgnoredFile(markedPath, file.Name()) {
+			continue
 		}
 
-		for _ ,file := range files {
-			if isIgnoredFile(markedPath, file.Name()) {
-				continue
-			}
+		filePath := filepath.Join(dir, file.Name())
 
-			filePath := filepath.Join(dir, file.Name())
-
-			if file.IsDir(){
-				markedPath = append(markedPath, dir)
-				CodeInformationList, markedPath = readCurrDir(filePath, CodeInformationList, markedPath)
-			}
-
-			if !file.IsDir() {
-				info := processFile(filePath)
-        CodeInformationList = append(CodeInformationList, info)
-			}
+		if file.IsDir() {
+			markedPath = append(markedPath, dir)
+			CodeInformationList, markedPath = readCurrDir(filePath, CodeInformationList, markedPath)
 		}
 
-		markedPath = append(markedPath, dir)
-		return CodeInformationList, markedPath
+		if !file.IsDir() {
+			info := processFile(filePath)
+			CodeInformationList = append(CodeInformationList, info)
+		}
+	}
+
+	markedPath = append(markedPath, dir)
+	return CodeInformationList, markedPath
 }
 
 func reduceInformation(informationList []CodeInformation) []CodeInformation {
@@ -59,7 +59,6 @@ func reduceInformation(informationList []CodeInformation) []CodeInformation {
 	patchedInfo := []CodeInformation{}
 	summedData := make(map[string]CodeInformation)
 
-	
 	for _, entry := range informationList {
 		if val, ok := summedData[entry.Extension]; ok {
 			val.TotalLines += entry.TotalLines
@@ -68,19 +67,19 @@ func reduceInformation(informationList []CodeInformation) []CodeInformation {
 			val.CodeLines += entry.CodeLines
 			val.BlankLines += entry.BlankLines
 			summedData[entry.Extension] = val
-			} else {
-				summedData[entry.Extension] = entry
-			}
+		} else {
+			summedData[entry.Extension] = entry
 		}
-		
-		for _, info := range summedData {
-			patchedInfo = append(patchedInfo, info)
-		}
-		
-		return patchedInfo
+	}
+
+	for _, info := range summedData {
+		patchedInfo = append(patchedInfo, info)
+	}
+
+	return patchedInfo
 }
 
-func isIgnoredFile(markedPath []string, word  string) bool {
+func isIgnoredFile(markedPath []string, word string) bool {
 
 	ignoredFiles := []string{"node_modules", "dist"}
 

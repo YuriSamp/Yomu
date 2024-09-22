@@ -5,9 +5,9 @@ import (
 	"strings"
 )
 
-func processFile(filePath string) CodeInformation  {
+func processFile(filePath string) CodeInformation {
 	extension := grabExtension(filePath)
-	
+
 	fileContentInBytes, err := os.ReadFile(filePath)
 
 	if err != nil {
@@ -19,7 +19,7 @@ func processFile(filePath string) CodeInformation  {
 	lines := strings.Split(fileContent, "\n")
 
 	blankLines := 0
-	commentedLines :=0
+	commentedLines := 0
 	codeLines := 0
 
 	for _, line := range lines {
@@ -38,12 +38,12 @@ func processFile(filePath string) CodeInformation  {
 		codeLines += 1
 	}
 
-	return CodeInformation{TotalLines: len(lines), CommentedLines:  commentedLines,CodeLines:  codeLines, BlankLines:  blankLines, Extension: extension, Files: 1 }
+	return CodeInformation{TotalLines: len(lines), CommentedLines: commentedLines, CodeLines: codeLines, BlankLines: blankLines, Extension: extension, Files: 1}
 }
 
-func grabExtension(fileName string ) string {
+func grabExtension(fileName string) string {
 	extension := strings.Split(fileName, ".")
-	
+
 	extensionKey := extension[len(extension)-1]
 
 	extensionMap := BuildExtensionMap()

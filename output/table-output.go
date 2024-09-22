@@ -17,19 +17,19 @@ func TableOutputBuilder(information []reader.CodeInformation) {
 	fmt.Println(divisor)
 
 	totalLines := 0
-	totalCodeLines := 0 
+	totalCodeLines := 0
 	totalCommentedLines := 0
 	totalBlankLines := 0
 	totalFile := 0
 
 	for _, information := range information {
 		fmt.Printf("%-12s %12d %12d %12d %12d %12d \n",
-		information.Extension, 
-		information.Files,
-		information.TotalLines, 
-		information.CodeLines, 
-		information.CommentedLines, 
-		information.BlankLines)
+			information.Extension,
+			information.Files,
+			information.TotalLines,
+			information.CodeLines,
+			information.CommentedLines,
+			information.BlankLines)
 
 		totalFile += information.Files
 		totalLines += information.TotalLines
@@ -40,12 +40,12 @@ func TableOutputBuilder(information []reader.CodeInformation) {
 
 	fmt.Println(divisor)
 
-		fmt.Printf("%-12s %12d %12d %12d %12d %12d \n",
-		"Total", 
+	fmt.Printf("%-12s %12d %12d %12d %12d %12d \n",
+		"Total",
 		totalFile,
-		totalLines, 
-		totalCodeLines, 
-		totalCommentedLines, 
+		totalLines,
+		totalCodeLines,
+		totalCommentedLines,
 		totalBlankLines)
 
 	fmt.Println(divisor)

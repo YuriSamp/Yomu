@@ -8,7 +8,6 @@ import (
 	"os"
 )
 
-
 func HandleArgs() {
 	version := "0.0.1"
 
@@ -36,6 +35,6 @@ func HandleArgs() {
 		output.JsonOutput(info)
 		os.Exit(0)
 	}
-		
+
 	output.TableOutputBuilder(info)
 }

@@ -7,23 +7,23 @@ import (
 )
 
 type Jsonoutput = struct {
-	Files int
-	TotalLines int
+	Files          int
+	TotalLines     int
 	CommentedLines int
-	CodeLines int
-	BlankLines int
+	CodeLines      int
+	BlankLines     int
 }
 
-func JsonOutput (information []reader.CodeInformation){
+func JsonOutput(information []reader.CodeInformation) {
 
 	jsonoutput := make(map[string]Jsonoutput)
 
 	for _, language := range information {
-		jsonOutputEntry := Jsonoutput{ Files: language.Files, 
-			TotalLines: language.TotalLines, 
-			CommentedLines: language.CommentedLines, 
-			CodeLines: language.CodeLines,
-			BlankLines: language.BlankLines,
+		jsonOutputEntry := Jsonoutput{Files: language.Files,
+			TotalLines:     language.TotalLines,
+			CommentedLines: language.CommentedLines,
+			CodeLines:      language.CodeLines,
+			BlankLines:     language.BlankLines,
 		}
 
 		jsonoutput[language.Extension] = jsonOutputEntry
